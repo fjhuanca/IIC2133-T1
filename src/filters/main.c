@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../imagelib/image.h"
+#include "max_tree.h"
 
 
 int main(int argc, char** argv)
@@ -17,7 +18,7 @@ int main(int argc, char** argv)
 
     /* ------------- POR IMPLEMENTAR -------------- */
     /* Aqui debes crear el MaxTree de la imagen.    */
-
+    find_neighbourhood(image->width, image->height, image->pixels);
     // Creamos una nueva imagen de igual tamaño, para el output
     Image* new_img = calloc(1, sizeof(Image));
     *new_img = (Image) {
@@ -26,7 +27,9 @@ int main(int argc, char** argv)
         .pixel_count = image->pixel_count,
         .pixels = calloc(image->pixel_count, sizeof(int))
     };
-
+    for (int i=0; i<new_img->pixel_count; i++){
+        new_img->pixels[i] = image->pixels[i];
+    }
     // Filtramos el arbol y lo guardamos en la imagen, segun el filtro que corresponda
     if (! strcmp("delta", argv[3]))
     {
