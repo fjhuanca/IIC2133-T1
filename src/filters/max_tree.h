@@ -11,6 +11,7 @@ struct node{
     int n_sons;
     int n_pixels;
     int *pixels;
+    int size;
 };
 
 // typedef struct pixel{

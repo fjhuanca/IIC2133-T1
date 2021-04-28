@@ -103,6 +103,7 @@ void add_node(int u, int *searched, int searched_size, int *pixels, Node *parent
             parent->pixels[j] = temp[j];
         }
         parent->n_pixels = index;
+        parent->size = searched_size;
         int n_nbhs = 0;
         int** nbhs = malloc(sizeof(int*) * width*height);
         int* n_nbs = calloc(width*height, sizeof(int));

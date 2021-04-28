@@ -8,10 +8,9 @@
 
 #include <sys/resource.h>
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv){
 
-    const rlim_t kStackSize = 64 * 1024 * 1024;   // min stack size = 16 MB
+    const rlim_t kStackSize = 24 * 1024 * 1024;   // min stack size = 16 MB
     struct rlimit rl;
     int result;
 
@@ -26,7 +25,6 @@ int main(int argc, char** argv)
         }
     }
 
-
     // Revisamos los argumentos
     if(argc < 4) {
         printf("Modo de uso: %s <input.png> <output.png> <command> [args]\n", argv[0]);
@@ -39,15 +37,6 @@ int main(int argc, char** argv)
     /* ------------- POR IMPLEMENTAR -------------- */
     /* Aqui debes crear el MaxTree de la imagen.    */
 
-    // int n_nbhs = 0;
-    // int** nbhs = malloc(sizeof(int*) * image->pixel_count);
-    // int* n_nbs = calloc(image->pixel_count, sizeof(int));
-    // int searched[image->pixel_count];
-    // for (int i=0; i<image->pixel_count; i++){
-    //     searched[i] = i;
-    // }
-    // for (int j=0; j<128; j++){
-    // find_neighbourhood(j, &searched, image->pixel_count, image->width, image->height, image->pixels, &n_nbhs, nbhs, n_nbs);}
     Node* root = malloc(sizeof(Node));
     create_tree(image->width, image->height, image->pixels, root);
 
@@ -59,23 +48,22 @@ int main(int argc, char** argv)
         .pixel_count = image->pixel_count,
         .pixels = calloc(image->pixel_count, sizeof(int))
     };
-    
+    for (int i=0; i<new_img->pixel_count; i++){
+        new_img->pixels[i] = image->pixels[i];
+    }
     // Filtramos el arbol y lo guardamos en la imagen, segun el filtro que corresponda
-    if (! strcmp("delta", argv[3]))
-    {
+    if (! strcmp("delta", argv[3])){
         // Filtro DELTA
         float max_delta = atof(argv[4]);
 
         /* ------------- POR IMPLEMENTAR -------------- */
         /* Aqui debes implementar el filtro delta y     */
+        delta_filter(root, max_delta, new_img->pixels);
         /* guardar la imagen filtrada en new_img.       */
 
     }
-    else if (! strcmp("area", argv[3]))
-    {
-        for (int i=0; i<new_img->pixel_count; i++){
-        new_img->pixels[i] = image->pixels[i];
-    }
+    else if (! strcmp("area", argv[3])){
+        
         // Filtro AREA-COLOR
         int min_area = atoi(argv[4]);
         int threshold = atoi(argv[5]);
