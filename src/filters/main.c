@@ -51,6 +51,8 @@ int main(int argc, char** argv){
     for (int i=0; i<new_img->pixel_count; i++){
         new_img->pixels[i] = image->pixels[i];
     }
+    
+    img_png_destroy(image);
     // Filtramos el arbol y lo guardamos en la imagen, segun el filtro que corresponda
     if (! strcmp("delta", argv[3])){
         // Filtro DELTA
@@ -82,7 +84,6 @@ int main(int argc, char** argv){
 
     // Liberamos los recursos
     destroy_tree(root);
-    img_png_destroy(image);
     img_png_destroy(new_img);
 
     // Terminamos exitosamente

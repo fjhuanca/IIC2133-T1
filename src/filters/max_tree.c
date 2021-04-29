@@ -95,7 +95,8 @@ void add_node(int u, int *searched, int searched_size, int *pixels, Node *parent
         parent->pixels = malloc(sizeof(int)*index);
         for (int j=0; j<index; j++){
             parent->pixels[j] = temp[j];
-        }
+        }        
+        free(temp);
         parent->n_pixels = index;
         parent->size = searched_size;
         int n_nbhs = 0;
@@ -118,7 +119,6 @@ void add_node(int u, int *searched, int searched_size, int *pixels, Node *parent
         }
         free(nbhs);
         free(n_nbs);
-        free(temp);
     }
     else if (u < 128 && searched_size > 0){
         free(temp);
