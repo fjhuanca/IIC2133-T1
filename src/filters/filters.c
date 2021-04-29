@@ -19,10 +19,8 @@ void area_filter(Node* root, int g, int a, int* out_pixels){
 }
 
 void delta_filter(Node* root, float d, int* out_pixels){
-    bool cond;
     float delta;
-    if (root->parent == NULL) cond = true;
-    else{
+    if (root->parent != NULL){
         delta = (float) (root->parent->size - root->size) /
                  root->parent->size;
         if (!(delta < d)){

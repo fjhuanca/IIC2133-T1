@@ -35,30 +35,24 @@ bool add_neighbour(int coord, int u, int *n_nbs, int *nbs, int *pixels, bool* fi
     return false;
 }
 
-bool find_local_neighbours(int coord, int *n_nbs, int *nbs, int u, int width,
+void find_local_neighbours(int coord, int *n_nbs, int *nbs, int u, int width,
                             int height, int* pixels, bool *filled){
     int nl = find_neighbour_l(coord, width, height);
     int nr = find_neighbour_r(coord, width, height);
     int na = find_neighbour_a(coord, width, height);
     int nb = find_neighbour_b(coord, width, height);
-    bool added = false;
     if (add_neighbour(nl, u, n_nbs, nbs, pixels, filled)){
         find_local_neighbours(nl, n_nbs, nbs, u, width, height, pixels, filled);
-        added = true;
     }
     if (add_neighbour(nr, u, n_nbs, nbs, pixels, filled)){
         find_local_neighbours(nr,n_nbs, nbs, u, width, height, pixels, filled);
-        added = true;
     }
     if (add_neighbour(na, u, n_nbs, nbs, pixels, filled)){
         find_local_neighbours(na, n_nbs, nbs, u, width, height, pixels, filled);
-        added = true;
     }
     if (add_neighbour(nb, u, n_nbs, nbs, pixels, filled)){
         find_local_neighbours(nb, n_nbs, nbs, u, width, height, pixels, filled);
-        added = true;
     }
-    return added;
 }
 
 
