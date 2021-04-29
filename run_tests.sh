@@ -8,12 +8,12 @@ mkdir results/hard
 ./filters imagenes/easy/test_1.png results/easy/test_1_delta_05.png delta 0.5
 ./filters imagenes/easy/test_2.png results/easy/test_2_area_12_40.png area 12 40
 ./filters imagenes/easy/test_2.png results/easy/test_2_area_50_5.png area 50 5
-./filters imagenes/easy/test_2.png results/easy/test_2_delta_001.png delta 0.001
+./filters imagenes/easy/test_2.png results/easy/test_2_delta_001.png delta 0.01
 ./filters imagenes/easy/test_3.png results/easy/test_3_area_50_40.png area 50 40
-./filters imagenes/easy/test_3.png results/easy/test_3_delta_001.png delta 0.001
-./filters imagenes/easy/test_3.png results/easy/test_3_delta_01.png delta 0.01
+./filters imagenes/easy/test_3.png results/easy/test_3_delta_001.png delta 0.01
+./filters imagenes/easy/test_3.png results/easy/test_3_delta_01.png delta 0.1
 ./filters imagenes/easy/test_4.png results/easy/test_4_area_18_30.png area 18 30
-./filters imagenes/easy/test_4.png results/easy/test_4_delta_001.png delta 0.001
+./filters imagenes/easy/test_4.png results/easy/test_4_delta_001.png delta 0.01
 
 
 ./filters imagenes/medium/mona_lisa.png results/medium/monalisa_area_5_30.png area 5 30
