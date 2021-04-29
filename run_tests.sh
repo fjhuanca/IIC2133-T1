@@ -33,16 +33,3 @@ mkdir results/hard
 
 ./filters imagenes/hard/plate.png results/hard/plate_area_100_60.png area 100 60
 ./filters imagenes/hard/plate.png results/hard/plate_delta_0005.png delta 0.005
-
-
-# declare -a difficulty=("easy" "medium" "hard")
-# for j in ${difficulty[@]}
-# do
-#     echo "Running $j Tests:"
-#     for i in {1..6..1}
-#     do
-#         echo "$j $i:"
-#         time ./kevin-21 tests/${j}/test_${i}.txt results/${j}/test_${i}_out.txt
-#     done
-#     echo "Finished $j Tests"
-# done

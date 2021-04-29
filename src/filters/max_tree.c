@@ -1,28 +1,42 @@
+/* Author: Fernando Huanca
+ * email: fjhuanca@uc.cl
+ * Description: Tree and neighbourhood functions. 
+ */
+
 #include <stdlib.h>
 #include <stdbool.h>
 #include "max_tree.h"
 #include <stdio.h>
 
+/* Function that returns left neighbour if exists, else returns -1 */
 int find_neighbour_l(int coord, int width, int height){
     if ((coord - 1) / width == coord / width) return coord - 1;
     else return -1;
 }
 
+/* Function that returns right neighbour if exists, else returns -1 */
 int find_neighbour_r(int coord, int width, int height){
     if ((coord + 1) / width == coord / width) return coord + 1;
     else return -1;
 }
 
+/* Function that returns above neighbour if exists, else returns -1 */
 int find_neighbour_a(int coord, int width, int height){
     if ((coord - width) >= 0) return coord - width;
     else return -1;
 }
-    
+
+/* Function that returns below neighbour if exists, else returns -1 */
 int find_neighbour_b(int coord, int width, int height){
     if ((coord + width) < height*width) return coord + width;
     else return -1;
 }
 
+
+/* Function that adds a neighbour to the neighbourhood if exists and if it is
+ * not alredy added. It returns true or false depending of the result of the
+ * operation.
+ */
 bool add_neighbour(int coord, int u, int *n_nbs, int *nbs, int *pixels, bool* filled){
     if (coord > -1 && pixels[coord] > u){
         if (!filled[coord]) {
@@ -35,6 +49,11 @@ bool add_neighbour(int coord, int u, int *n_nbs, int *nbs, int *pixels, bool* fi
     return false;
 }
 
+
+/* Function for searching the 4 possible neighbours of every pixel. If a pixel
+ * is added as a neighbour of the initial pixel the function is called
+ * recursively for searching the neighbours of the neighbours.  
+ */
 void find_local_neighbours(int coord, int *n_nbs, int *nbs, int u, int width,
                             int height, int* pixels, bool *filled){
     int nl = find_neighbour_l(coord, width, height);
@@ -56,6 +75,10 @@ void find_local_neighbours(int coord, int *n_nbs, int *nbs, int u, int width,
 }
 
 
+/* 
+ * Function for making neigbourhoods depending of the u threshold parameter.
+ * Receives threshold and pixels where searching is started as input.
+ */
 int find_neighbourhood(int u, int *searched, int searched_size, int width,
                        int height, int *pixels, int *n_nbhs, int **nbhs,
                        int *n_nbs){
@@ -79,6 +102,12 @@ int find_neighbourhood(int u, int *searched, int searched_size, int width,
     return 0;
 }
 
+/* Function for adding a node to the tree, it's designed to be called
+ * recursively. So When a node is added, then neighbourhoods of u+1 threshold
+ * are searched. If no pixels have gray equal to u then the node is omitted
+ * and the function is called recursively until a node of u=grey is find or
+ * there are no more pixels to add (nodes without sons). 
+*/
 void add_node(int u, int *searched, int searched_size, int *pixels, Node *parent, int width,
              int height){
 
@@ -129,6 +158,10 @@ void add_node(int u, int *searched, int searched_size, int *pixels, Node *parent
     }
 }
 
+
+/* Function for start the tree, firs the root node it's created, then it's
+ * passed to the add_node function for adding them recursively.
+ */
 void create_tree(int width, int height, int *pixels, Node* root){
     root->u = 0;
     root->parent = NULL;
@@ -144,6 +177,10 @@ void create_tree(int width, int height, int *pixels, Node* root){
 
 }
 
+
+/* Function for printing recursively the tree. Works for debugging at 
+ * small trees.
+ */
 void print_tree(Node* nodo){
     printf("Nodo: %d - ", nodo->u);
     for (int j=0; j<nodo->n_pixels;j++){
@@ -158,6 +195,8 @@ void print_tree(Node* nodo){
     }
 }
 
+/* Function designed to free the memory used on tree nodes.
+*/
 void destroy_tree(Node* nodo){
     for (int i=0; i<nodo->n_sons; i++){
         destroy_tree(nodo->sons[i]);
