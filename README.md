@@ -1,4 +1,4 @@
-# <span style="color:red">  Consideraraciones-T1-2021-1 </span>
+# Consideraraciones Importates para el Corrector
 
 - Todos los tests funcionan.
 - Se implementó un pequeño fragmento de código para ampliar el stack a 24MB si esque su tamaño es inferior.
