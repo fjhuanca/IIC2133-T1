@@ -10,7 +10,9 @@
 
 int main(int argc, char** argv){
 
-    const rlim_t kStackSize = 24 * 1024 * 1024;   // min stack size = 16 MB
+    // bloque de código para aumentar el stack size, obtenido de stack overflow.
+    
+    const rlim_t kStackSize = 24 * 1024 * 1024;   // min stack size = 24 MB
     struct rlimit rl;
     int result;
 

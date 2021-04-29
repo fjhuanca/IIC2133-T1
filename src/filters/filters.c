@@ -1,3 +1,8 @@
+/* Author: Fernando Huanca
+ * email: fjhuanca@uc.cl
+ * Description: Filter functions. 
+ */
+
 #include "filters.h"
 #include <stdbool.h>
 #include <stdlib.h>
